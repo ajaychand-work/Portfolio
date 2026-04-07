@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ajay Chand — Data Analyst Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --surface2: #1e1e1e;
+    --border: rgba(255,255,255,0.08);
+    --text: #f0ede8;
+    --muted: #888;
+    --accent: #c8f04d;
+    --accent2: #4df0b4;
+    --accent3: #f04d8a;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-sans: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  section { padding: 7rem 4rem; max-width: 1100px; margin: 0 auto; }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 6rem;
+    max-width: 100%;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 1.05;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    max-width: 900px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 2rem 0 3rem;
+    line-height: 1.8;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2px;
+    font-size: 13px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0d0d0d;
+    font-weight: 500;
+  }
+
+  .btn-primary:hover { background: #d8ff5a; }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 0.5px solid var(--border);
+  }
+
+  .btn-outline:hover { border-color: rgba(255,255,255,0.3); }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 4rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .scroll-line {
+    width: 40px;
+    height: 0.5px;
+    background: var(--muted);
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+    max-width: 200px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text h2 {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text p {
+    color: rgba(240,237,232,0.7);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+  }
+
+  .stat-box {
+    background: var(--surface);
+    padding: 2rem 1.5rem;
+  }
+
+  .stat-num {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    color: var(--accent);
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+  }
+
+  .skill-card {
+    background: var(--surface);
+    padding: 1.75rem;
+    transition: background 0.2s;
+  }
+
+  .skill-card:hover { background: var(--surface2); }
+
+  .skill-icon {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+
+  .skill-name {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 0.75rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    border: 0.5px solid var(--border);
+    padding: 3px 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .project-card {
+    border: 0.5px solid var(--border);
+    background: var(--surface);
+    padding: 2.5rem;
+    margin-bottom: 1px;
+    transition: border-color 0.2s;
+  }
+
+  .project-card:hover { border-color: rgba(200,240,77,0.3); }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .project-link {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    border-bottom: 0.5px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .project-link:hover { border-color: var(--accent); }
+
+  .project-title {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .project-desc {
+    color: rgba(240,237,232,0.65);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+  }
+
+  .pipeline {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .pipe-step {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: #0d0d0d;
+    background: var(--accent);
+    padding: 4px 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .pipe-arrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    padding: 0 4px;
+  }
+
+  .project-finding {
+    background: rgba(200,240,77,0.06);
+    border-left: 2px solid var(--accent);
+    padding: 1rem 1.25rem;
+    font-size: 0.875rem;
+    color: rgba(240,237,232,0.8);
+  }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-date {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    padding-top: 4px;
+  }
+
+  .exp-role {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+
+  .exp-company {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .exp-desc {
+    font-size: 0.875rem;
+    color: rgba(240,237,232,0.65);
+    line-height: 1.8;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .contact-heading {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border: 0.5px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+
+  .contact-link:hover {
+    border-color: rgba(200,240,77,0.4);
+    background: rgba(200,240,77,0.04);
+  }
+
+  .contact-link-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  footer p {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    .hero { padding: 6rem 1.5rem 4rem; }
+    .scroll-indicator { left: 1.5rem; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">AJ // portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero" style="position: relative;">
+  <p class="hero-tag">// data analyst · bangalore, india</p>
+  <h1>Turning raw data<br>into <em>decisions</em></h1>
+  <p class="hero-sub">1+ year at Citta AI building end-to-end pipelines — from messy Excel sheets to Power BI dashboards that drive real budget calls.</p>
+  <div class="hero-links">
+    <a href="#projects" class="btn btn-primary">View work</a>
+    <a href="mailto:ajaychandsiddula.work@gmail.com" class="btn btn-outline">Get in touch</a>
+    <a href="https://github.com/ajaychand-work" class="btn btn-outline" target="_blank">GitHub</a>
+  </div>
+  <div class="scroll-indicator">
+    <span class="scroll-line"></span>
+    scroll
+  </div>
+</div>
+
+<section id="about">
+  <p class="section-label">01 — about</p>
+  <div class="about-grid">
+    <div class="about-text">
+      <h2>Analyst who actually understands the data.</h2>
+      <p>I'm Ajay Chand — a Data Analyst at Citta AI specialising in marketing campaign analytics, data pipelines, and performance reporting. My work spans Python, SQL, Power BI, and Excel — from raw data cleaning to stakeholder-ready dashboards.</p>
+      <p>Before analytics, I spent 2+ years as a crypto futures trader, which gave me a sharp eye for pattern recognition, risk management, and reading data under pressure — skills that transfer directly to data work.</p>
+      <p>I hold a B.E. in Electronics & Communication Engineering from Birla Institute of Technology, Mesra (2022).</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-num">~15%</div>
+        <div class="stat-label">campaign ROI lift delivered</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">26K+</div>
+        <div class="stat-label">records processed in key project</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">4</div>
+        <div class="stat-label">channels analysed (Meta, Google, LinkedIn, YT)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">18mo</div>
+        <div class="stat-label">campaign data in core pipeline</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <p class="section-label">02 — skills</p>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">01</div>
+      <div class="skill-name">Python</div>
+      <div class="skill-tags">
+        <span class="tag">Pandas</span>
+        <span class="tag">NumPy</span>
+        <span class="tag">Matplotlib</span>
+        <span class="tag">Seaborn</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Streamlit</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">02</div>
+      <div class="skill-name">SQL</div>
+      <div class="skill-tags">
+        <span class="tag">MySQL</span>
+        <span class="tag">Window Functions</span>
+        <span class="tag">EDA</span>
+        <span class="tag">Data Cleaning</span>
+        <span class="tag">REGEXP</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">03</div>
+      <div class="skill-name">Power BI</div>
+      <div class="skill-tags">
+        <span class="tag">DAX</span>
+        <span class="tag">Power Query</span>
+        <span class="tag">Dashboards</span>
+        <span class="tag">KPI Reporting</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">04</div>
+      <div class="skill-name">Analytics</div>
+      <div class="skill-tags">
+        <span class="tag">Campaign Analytics</span>
+        <span class="tag">KPI Computation</span>
+        <span class="tag">ROI / ROAS / CTR</span>
+        <span class="tag">Time-series</span>
+        <span class="tag">Anomaly Detection</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">05</div>
+      <div class="skill-name">Excel</div>
+      <div class="skill-tags">
+        <span class="tag">Pivot Tables</span>
+        <span class="tag">Charts</span>
+        <span class="tag">Advanced Formulas</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">06</div>
+      <div class="skill-name">Other</div>
+      <div class="skill-tags">
+        <span class="tag">Tableau</span>
+        <span class="tag">SQLite</span>
+        <span class="tag">ChatGPT / Copilot</span>
+        <span class="tag">TradingView</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <p class="section-label">03 — projects</p>
+
+  <div class="project-card">
+    <div class="project-header">
+      <span class="project-num">001</span>
+      <a href="https://github.com/ajaychand-work/grocery-campaign-analysis" class="project-link" target="_blank">github ↗</a>
+    </div>
+    <h3 class="project-title">Marketing Campaign Performance Analysis</h3>
+    <div class="pipeline">
+      <span class="pipe-step">Excel</span>
+      <span class="pipe-arrow">→</span>
+      <span class="pipe-step">MySQL</span>
+      <span class="pipe-arrow">→</span>
+      <span class="pipe-step">Python</span>
+      <span class="pipe-arrow">→</span>
+      <span class="pipe-step">Power BI</span>
+    </div>
+    <p class="project-desc">End-to-end analytics pipeline for an online grocery client. Processed 18 months of raw campaign data (26,000+ records across 3 Excel sheets) across 4 channels — Meta, Google, LinkedIn, and YouTube. Cleaned messy data in MySQL using REGEXP, STR_TO_DATE, and window functions (RANK, LAG, SUM OVER). Computed KPIs including ROI, ROAS, CTR, CVR, and CAC in Python using Pandas and Scikit-learn. Delivered an interactive Power BI dashboard for stakeholder reporting.</p>
+    <div class="project-finding">
+      Key finding: YouTube was receiving significant spend at the lowest ROI across all channels. Recommended reallocation to Google — contributing to ~15% improvement in overall campaign ROI.
+    </div>
+    <div class="skill-tags" style="margin-top: 1.25rem;">
+      <span class="tag">Python</span>
+      <span class="tag">MySQL</span>
+      <span class="tag">Power BI</span>
+      <span class="tag">Pandas</span>
+      <span class="tag">Scikit-learn</span>
+      <span class="tag">EDA</span>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-header">
+      <span class="project-num">002</span>
+      <a href="https://github.com/ajaychand-work" class="project-link" target="_blank">github ↗</a>
+    </div>
+    <h3 class="project-title">AMIDS — Autonomous Marketing Intelligence & Decision System</h3>
+    <div class="pipeline">
+      <span class="pipe-step">FastAPI</span>
+      <span class="pipe-arrow">→</span>
+      <span class="pipe-step">SQLite</span>
+      <span class="pipe-arrow">→</span>
+      <span class="pipe-step">Streamlit</span>
+    </div>
+    <p class="project-desc">Python-based marketing analytics platform built with FastAPI, SQLite, and Streamlit for real-time campaign KPI tracking. Used for actual internal reporting at Citta AI — tracks spend, revenue, ROI, reach, and conversions across campaigns. Designed for non-technical stakeholder consumption with a clean dashboard interface.</p>
+    <div class="skill-tags" style="margin-top: 1.25rem;">
+      <span class="tag">Python</span>
+      <span class="tag">FastAPI</span>
+      <span class="tag">SQLite</span>
+      <span class="tag">Streamlit</span>
+      <span class="tag">KPI Tracking</span>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <p class="section-label">04 — experience</p>
+
+  <div class="exp-item">
+    <div class="exp-date">Aug 2025 — Present</div>
+    <div>
+      <div class="exp-role">SMM & Data Analyst</div>
+      <div class="exp-company">Citta AI · Hyderabad</div>
+      <div class="exp-desc">Analysing multi-channel marketing campaign data to uncover performance trends and optimise targeting. Building interactive Power BI dashboards tracking spend, revenue, ROI, reach, and conversions. Automating data cleaning and transformation pipelines in Python (Pandas). Delivered insights contributing to ~15% improvement in campaign ROI through optimised spend allocation.</div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-date">Nov 2024 — Jul 2025</div>
+    <div>
+      <div class="exp-role">Data Analytics Trainee</div>
+      <div class="exp-company">Citta AI · Hyderabad</div>
+      <div class="exp-desc">Collected and analysed campaign performance data across channels. Built dashboards and automated reports in Power BI and Excel. Cleaned and validated large datasets using Python (Pandas, NumPy) and performed EDA using Matplotlib and Seaborn. Collaborated with marketing and sales teams to translate findings into actionable recommendations.</div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-date">Aug 2021 — Jan 2024</div>
+    <div>
+      <div class="exp-role">Freelance Futures Trader</div>
+      <div class="exp-company">Self-Employed</div>
+      <div class="exp-desc">Actively traded crypto futures (BTC, ETH, altcoins) applying technical analysis — FVG, liquidity zones, support/resistance, RSI, MACD, moving averages on TradingView. Applied strict risk management (1% capital per trade, stop-loss/trailing stops) with systematic trade logging to monitor win rate and refine strategy.</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="section-label">05 — contact</p>
+  <div class="contact-grid">
+    <div>
+      <h2 class="contact-heading">Open to analyst roles.</h2>
+      <p style="color: rgba(240,237,232,0.6); font-size: 0.9rem;">Based in Bangalore. Available for Data Analyst, Business Analyst, Growth Analyst, and related roles. Feel free to reach out directly.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:ajaychandsiddula.work@gmail.com" class="contact-link">
+        <div>
+          <div class="contact-link-label">email</div>
+          <div>ajaychandsiddula.work@gmail.com</div>
+        </div>
+        <span style="color: var(--accent);">↗</span>
+      </a>
+      <a href="https://linkedin.com/in/ajay-chand-251024341" class="contact-link" target="_blank">
+        <div>
+          <div class="contact-link-label">linkedin</div>
+          <div>linkedin.com/in/ajay-chand-251024341</div>
+        </div>
+        <span style="color: var(--accent);">↗</span>
+      </a>
+      <a href="https://github.com/ajaychand-work" class="contact-link" target="_blank">
+        <div>
+          <div class="contact-link-label">github</div>
+          <div>github.com/ajaychand-work</div>
+        </div>
+        <span style="color: var(--accent);">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Siddula Ajay Chand</p>
+  <p>Data Analyst · Bangalore, India</p>
+</footer>
+
+</body>
+</html>
